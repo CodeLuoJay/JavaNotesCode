@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mybatis.course.dao</artifactId>
-    <name>mybatis-course-start</name>
+    <name>mybatis-course-dao</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

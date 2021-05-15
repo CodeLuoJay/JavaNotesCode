@@ -9,10 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java-tool-lombok</module>
+        <module>java-tool-hutool</module>
         <module>mybatis-course-dao</module>
         <module>mybatis-course-util</module>
         <module>mybatis-course-start</module>
-        <module>java-tool-hutool</module>
+        <module>mybatis-course-proxy</module>
     </modules>
     <!--1.修改打包方式-->
     <packaging>pom</packaging>
