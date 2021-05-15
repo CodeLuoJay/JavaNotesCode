@@ -9,7 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>java-tool-lombok</module>
-        <module>mybatis-course</module>
+        <module>mybatis-course-dao</module>
+        <module>mybatis-course-util</module>
+        <module>mybatis-course-start</module>
         <module>java-tool-hutool</module>
     </modules>
     <!--1.修改打包方式-->

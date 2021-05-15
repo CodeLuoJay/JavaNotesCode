@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：命名空间 StudentDao能找到StudentDao.xml一一对应的映射实例-->
+<mapper namespace="com.luojay.dao.StudentDao">
+    <!--resultType:表示结果类型 是sql语句执行后得到的ResultSet，遍历这个ResultSet得到java对象的类型，resultType的值是全限定类名-->
+    <select id="findAllStudents" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student order by id
+    </select>
+    <!--参数类型是对象类型，只要对象属性能一一对上就可以直接用了-->
+    <insert id="insertStudent" parameterType="com.luojay.domain.Student">
+        insert into student values (#{id},#{name},#{email},#{age})
+    </insert>
+</mapper>
