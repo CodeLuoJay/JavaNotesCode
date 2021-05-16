@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：命名空间 StudentDao能找到StudentDao.xml一一对应的映射实例-->
+<mapper namespace="com.luojay.dao.StudentDao">
+    <!--resultType:表示结果类型 是sql语句执行后得到的ResultSet，遍历这个ResultSet得到java对象的类型，resultType的值是全限定类名-->
+    <select id="findAllStudents" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student order by id
+    </select>
+    <!--参数类型是对象类型，只要对象属性能一一对上就可以直接用了-->
+    <insert id="insertStudent" parameterType="com.luojay.domain.Student">
+        insert into student values (#{id},#{name},#{email},#{age})
+    </insert>
+    <!--
+    parameterType:dao接口中方法参数的数据类型。
+    parameterType它的值是java的数据类型全限定名称或者是mybatis定义的别名例如：parameterType="java.lang.Integer"
+    parameterType="int" 使用mybatis定义的别名 对应javaType="java.lang.Integer"
+    注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数类型。
+    所以可以没有。一般我们也不写。
+    -->
+    <select id="findStudentById" parameterType="java.lang.Integer" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student where id = #{StudentId}
+    </select>
+</mapper>

@@ -38,6 +38,7 @@ public class TestMybatis {
         System.out.println(rows);
         //  9.mybatis默认不会自动提交事务，所以在insert，update，delete后需要手动提交事务
         sqlSession.commit();
-
+        //  10.关闭连接
+        sqlSession.close();
     }
 }

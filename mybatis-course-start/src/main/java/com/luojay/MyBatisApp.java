@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author LuoJay
  * @version V1.0.0
- * 测试类
+ * 测试类(入门案例中有两个地方写了测试类，一个是MyBatisApp，另外一个是TestMybatis)
  * @date 2021/5/7 0:37
  */
 public class MyBatisApp {
@@ -35,5 +35,7 @@ public class MyBatisApp {
         List<Student> studentList = sqlSession.selectList(sqlId);
         //  8.输出结果
         studentList.forEach(System.out::println);
+        //  9.关闭sqlSession会话连接
+        sqlSession.close();
     }
 }

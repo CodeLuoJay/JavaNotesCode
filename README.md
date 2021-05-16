@@ -13,7 +13,8 @@
 | study-guide      | 所有文章集合     | -                                                            |
 | java-tool-hutool | hutool工具类学习 |                                                              |
 | java-tool-lombok | lombok插件学习   |                                                              |
-| mybatis-course   | mybatis入门学习  | [Mybatis高度耦合入门学习一](study-guide/Mybatis高度耦合入门学习一.md) |
+| mybatis-course-start   | mybatis入门学习  | [Mybatis入门学习一](study-guide/Mybatis入门学习一.md) |
+| mybatis-course-util   | mybatis入门学习  | [Mybatis入门学习二](study-guide/Mybatis入门学习二.md) |
 
 ### 2.2目录结构说明
 

@@ -16,11 +16,8 @@ import java.io.InputStream;
  * @date 2021/5/14 20:19
  */
 public class MybatisUtils {
-    private static SqlSessionFactory sessionFactory = null;
+    private static SqlSessionFactory sessionFactory;
 
-    /**
-     * 静态代码块保证类中只有一个SqlSessionFactory
-     */
     static{
         String config = "mybatis.xml";
         // 2.读取这个config表示的文件
@@ -36,11 +33,6 @@ public class MybatisUtils {
         sessionFactory = builder.build(in);
     }
 
-    /**
-     * 获得sqlSession实例
-     *
-     * @return {@link SqlSession}
-     */
     public static SqlSession getSqlSession(){
         //  保证sqlSession唯一
         SqlSession sqlSession = null;
@@ -50,11 +42,6 @@ public class MybatisUtils {
         return sqlSession;
     }
 
-    /**
-     * 关闭sqlSession
-     *
-     * @param sqlSession sqlSession对象
-     */
     public static void closeSqlSession(SqlSession sqlSession){
         if(sqlSession != null){
             sqlSession.commit();
