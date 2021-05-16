@@ -34,7 +34,7 @@ public class TestMybatis {
         // 4.输出结果
         System.out.println(rows);
         // 5.提交事务并关闭连接
-        sqlSession.commit();
+        MybatisUtils.closeSqlSession(sqlSession);
     }
 
     /**
