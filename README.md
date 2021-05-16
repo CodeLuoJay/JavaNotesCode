@@ -15,6 +15,8 @@
 | java-tool-lombok | lombok插件学习   |                                                              |
 | mybatis-course-start   | mybatis入门学习  | [Mybatis入门学习一](study-guide/Mybatis入门学习一.md) |
 | mybatis-course-util   | mybatis入门学习  | [Mybatis入门学习二](study-guide/Mybatis入门学习二.md) |
+| mybatis-course-dao   | mybatis入门学习  | [Mybatis入门学习三](study-guide/Mybatis入门学习三.md) |
+| mybatis-course-proxy   | mybatis入门学习  | [Mybatis入门学习四](study-guide/Mybatis入门学习三.md) |
 
 ### 2.2目录结构说明
 
