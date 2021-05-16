@@ -49,33 +49,68 @@
 首先项目中用到`Maven`聚合模块，`JavaNotesCode`是根目录，`pom.xml`是父工程的`Maven`依赖，各种模块的依赖都会在父模块的`dependencyManagement`进行统一依赖管理。
 
 ```xml
-	<!--工程的父模块-->
-    <groupId>com.luojay</groupId>
-    <artifactId>JavaNotesCode</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>java-tool-lombok</module>
-        <module>mybatis-course</module>
-        <module>java-tool-hutool</module>
-    </modules>
-    <!--2.此标签内定义版本号-->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>JavaNotesCode</artifactId>
+        <groupId>com.luojay</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mybatis.course.util</artifactId>
+    <name>mybatis-course-util</name>
+
     <properties>
-        <junit.version>4.12</junit.version>
-        <lombok.version>1.18.12</lombok.version>
-        <mybatis.version>3.5.1</mybatis.version>
-        <mysql.version>5.1.9</mysql.version>
-        <hutool.version>5.3.7</hutool.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <!--3.依赖管理-->
-    <dependencyManagement>
-        <dependencies>
-            <!--junit-->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-            </dependency>
-    </dependencyManagement>
+
+    <dependencies>
+        <!--junit Test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--mybatis Orm-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <!--mysql Driver-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--lombok plugins-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <!--指定资源文件-->
+        <resources>
+            <!--指定跟dao同包的xml文件打包到类路径下-->
+            <resource>
+                <directory>src/main/java</directory>
+                <!--包括目录下的.propertis .xml 文件都会被扫描到-->
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <!--同时指定资源文件夹的所有文件打包到类路径下-->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+</project>
 ```
 
 如果单独下载某个模块，之后不知道依赖的版本号可以在父工程的`pom.xml`找到对应的版本号，添加进子模块理论上可以完成单模块的代码学习。
