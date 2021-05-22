@@ -12,8 +12,14 @@
     <insert id="insertStudent" parameterType="com.luojay.domain.Student">
         insert into student values (#{id},#{name},#{email},#{age})
     </insert>
-
-    <select id="findStudentById" resultType="com.luojay.domain.Student">
+    <!--
+    parameterType:dao接口中方法参数的数据类型。
+    parameterType它的值是java的数据类型全限定名称或者是mybatis定义的别名例如：parameterType="java.lang.Integer"
+    parameterType="int" 使用mybatis定义的别名 对应javaType="java.lang.Integer"
+    注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数类型。
+    所以可以没有。一般我们也不写。
+    -->
+    <select id="findStudentById" parameterType="java.lang.Integer" resultType="com.luojay.domain.Student">
         select id,name,email,age from Student where id = #{StudentId}
     </select>
 </mapper>

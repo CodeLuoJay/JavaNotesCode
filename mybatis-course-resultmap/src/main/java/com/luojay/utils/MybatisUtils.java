@@ -1,4 +1,4 @@
-package com.luojay;
+package com.luojay.utils;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +16,7 @@ import java.io.InputStream;
  * @date 2021/5/14 20:19
  */
 public class MybatisUtils {
-    private static SqlSessionFactory sessionFactory = null;
+    private static SqlSessionFactory sessionFactory;
 
     static{
         String config = "mybatis.xml";

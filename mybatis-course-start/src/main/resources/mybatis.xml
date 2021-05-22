@@ -8,6 +8,25 @@
         <!--设置mybatis日志，输出到控制台-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
+    <!--起别名-->
+    <typeAliases>
+        <!--
+        第一种方式：
+        可以指定一个类型一个自定义别名
+        type：自定义类型的全限定名称
+        alias：别名（短小，容易记忆的）
+        -->
+        <!--
+            <typeAlias type="com.luojay.domain.student" alias="stu"/>
+            <typeAlias type="com.luojay.vo.Viewstudent" alias="vstu"/>
+        -->
+        <!--
+        第二种方式
+        <package>name是包名，这个包中的所有类，类名就是别名（类名不区分大小写）
+        <typeAlias type="com.luojay.domain.Student" alias="stu"/>
+        -->
+        <package name="com.luojay.domain"/>
+    </typeAliases>
     <!--环境配置：配置数据库 default必须和某个environment的id值一样 告诉mybatis使用哪个数据库的连接信息，也就是访问哪个数据库-->
     <environments default="dev">
         <!--environment：一个数据库信息的配置（环境） id：一个唯一值，自定义，表示环境的名称-->

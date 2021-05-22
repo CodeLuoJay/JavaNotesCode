@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luojay.dao.CourseDao">
+    <select id="findCourseById" resultType="com.luojay.domain.Course">
+       select * from course
+    </select>
+
+    <!--级联映射associate用法（一对一）-->
+    <resultMap id="associateCourseMap" type="com.luojay.domain.Course">
+        <id column="courseId" property="courseId"/>
+        <result column="courseName" property="courseName"/>
+        <!--association标签：映射对象类型的字段 property：javabean对象类型的属性名 javaType：对象的全限定类名-->
+        <collection property="student" ofType="com.luojay.domain.Student">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="email" property="email"/>
+        </collection>
+    </resultMap>
+    <select id="findCourseWithStudent" resultMap="associateCourseMap">
+        select s.id, s.name,s.age, s.email, s.courseId,c.courseName
+        from course c
+                 left join student s on s.courseId = c.courseId
+        where c.courseId = #{courseId}
+    </select>
+</mapper>

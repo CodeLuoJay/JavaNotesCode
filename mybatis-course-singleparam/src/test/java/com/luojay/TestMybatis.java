@@ -1,16 +1,11 @@
 package com.luojay;
 
 import com.luojay.dao.StudentDao;
-import com.luojay.domain.Student;
-import org.apache.ibatis.io.Resources;
+import com.luojay.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 /**
  * @author LuoJay

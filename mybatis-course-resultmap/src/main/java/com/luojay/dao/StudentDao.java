@@ -3,6 +3,7 @@ package com.luojay.dao;
 import com.luojay.domain.Student;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,4 +41,19 @@ public interface StudentDao {
     List<Student> selectMulitParam(@Param("myname")String name,
                                    @Param("myage")Integer age);
 
+    /**
+     * 查询带有课程学生课程信息
+     *
+     * @param id id
+     * @return {@link Student}
+     */
+    Student findStudentWithCourse(@Param("id") Integer id);
+
+    /**
+     * 查询带有课程学生课程信息
+     *
+     * @param id id
+     * @return {@link Student}
+     */
+    Student findStudentWithAssociate(@Param("id") Integer id);
 }

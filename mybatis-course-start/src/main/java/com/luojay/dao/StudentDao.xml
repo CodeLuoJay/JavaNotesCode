@@ -9,7 +9,7 @@
         select id,name,email,age from Student order by id
     </select>
     <!--参数类型是对象类型，只要对象属性能一一对上就可以直接用了-->
-    <insert id="insertStudent" parameterType="com.luojay.domain.Student">
+    <insert id="insertStudent" parameterType="stu">
         insert into student values (#{id},#{name},#{email},#{age})
     </insert>
 </mapper>
