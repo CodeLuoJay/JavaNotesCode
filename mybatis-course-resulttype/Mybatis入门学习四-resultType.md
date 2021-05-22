@@ -38,6 +38,10 @@ public interface StudentDao {
 >
 > 例如上面的接口是Integer id 而条件查询写的是 where id = #{StudentId}
 
+案例学习源码：
+
+[JavaNotesCode/mybatis-course-singleparam at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-singleparam)
+
 ### 1.2`parameterType`属性的作用
 
 1. 它的作用就是指Java代码中把数据传入到mapper文件的sql语句中，限制传递参数的类型，比如上面的`findStudentById`传递的参数类型是`Integer`,那么我们可以指定`mapper`文件中的`id`为`findStudentById`的参数类型是`java.lang.Integer`，也就是全限定类名。
@@ -94,6 +98,10 @@ Mybatis将Java的基本数据类型（包含包装类）都设置了别名，可
 	select * from student where name=#{myname} or age=#{myage}
 </select>
 ```
+
+案例源码学习：
+
+[JavaNotesCode/mybatis-course-mulitparam at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-mulitparam)
 
 ## 3.Mybatis返回数据封装输出结果`resultType`
 
@@ -169,7 +177,7 @@ Mybatis执行了sql语句，得到数据如何封装成Java对象？实际上，
 
 封装成Map的原理图如下
 
-![image-20210522142756040](C:\Users\Admin\Desktop\Mybatis入门学习三.assets\image-20210522142756040.png)
+![image-20210522142756040](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210522142756040.png)
 
 ### 3.4使用`resultType`类型来封装成基本数据类型
 
@@ -277,3 +285,8 @@ Mybatis执行了sql语句，得到数据如何封装成Java对象？实际上，
 ```
 
 关于Mybatis的传递参数给对应SQL语句执行和SQL语句执行结果返回封装成Java对象的教程就写到这里，几乎把日常开发中常用到的东西都总结了一下，希望自己在日常开发过程中有遗忘的时候，再回来翻这篇笔记，同时也希望能帮助到别人，更快学习Mybatis的传参和结果封装。
+
+案例学习源码：
+
+[JavaNotesCode/mybatis-course-resulttype at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-resulttype)
+
