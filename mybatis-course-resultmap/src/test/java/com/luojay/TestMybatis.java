@@ -2,6 +2,7 @@ package com.luojay;
 
 import com.luojay.dao.CourseDao;
 import com.luojay.dao.StudentDao;
+import com.luojay.domain.Course;
 import com.luojay.domain.Student;
 import com.luojay.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -40,7 +41,8 @@ public class TestMybatis {
     public void findCourseWithStudentCollection() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         CourseDao courseDao = sqlSession.getMapper(CourseDao.class);
-        System.out.println(courseDao.findCourseWithStudent(1));
+        Course courseWithStudent = courseDao.findCourseWithStudent(1);
+        System.out.println(courseWithStudent.toString());
     }
     
     @Test
@@ -56,5 +58,11 @@ public class TestMybatis {
             student.setId(rs.getInt("id"));
             student.setName(rs.getString("name"));
         }
+    }
+    @Test
+    public void findStudentWithAlias(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        StudentDao studentDao = sqlSession.getMapper(StudentDao.class);
+        System.out.println(studentDao.findStudentWithAlias(1));
     }
 }

@@ -19,6 +19,8 @@ public class Student {
     private String email;
     /** 年龄 */
     private int age;
+    /** 课程ID */
+    private int cId;
     /** 课程 */
     private Course course;
 
@@ -62,5 +64,25 @@ public class Student {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public int getcId() {
+        return cId;
+    }
+
+    public void setcId(int cId) {
+        this.cId = cId;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", cId=" + cId +
+                ", course=" + course +
+                '}';
     }
 }

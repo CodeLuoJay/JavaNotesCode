@@ -54,6 +54,8 @@
             <result column="courseName" property="courseName"/>
         </association>
     </resultMap>
+
+    <!--级联映射associate用法（一对一）-->
     <select id="findStudentWithAssociate" resultMap="associateMap">
         select s.id, s.name,s.age, s.email, s.courseId,c.courseName
         from student s
@@ -61,5 +63,16 @@
         where id = ${id}
     </select>
 
-    <!--级联映射associate用法（一对多）-->
+    <!--自定义列名和属性名不不一致的封装规则-->
+    <resultMap id="aliasMap" type="com.luojay.domain.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="courseId" property="cId"></result>
+    </resultMap>
+    <select id="findStudentWithAlias" resultMap="aliasMap">
+        select s.id, s.name,s.age, s.email, s.courseId
+        from student s where id = ${id}
+    </select>
 </mapper>

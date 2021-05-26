@@ -38,6 +38,13 @@ public interface StudentDao {
      */
     Student findStudentById(Integer id);
 
+    /**
+     * 传递多个参数作为条件查询学生
+     *
+     * @param name 的名字
+     * @param age  年龄
+     * @return {@link List<Student>}
+     */
     List<Student> selectMulitParam(@Param("myname")String name,
                                    @Param("myage")Integer age);
 
@@ -56,4 +63,12 @@ public interface StudentDao {
      * @return {@link Student}
      */
     Student findStudentWithAssociate(@Param("id") Integer id);
+
+    /**
+     * 查询学生(列名和javabean不一致情况)
+     *
+     * @param id id
+     * @return {@link Student}
+     */
+    Student findStudentWithAlias(@Param("id") Integer id);
 }
