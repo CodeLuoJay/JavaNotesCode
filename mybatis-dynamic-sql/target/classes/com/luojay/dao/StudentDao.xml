@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：命名空间 StudentDao能找到StudentDao.xml一一对应的映射实例-->
+<mapper namespace="com.luojay.dao.StudentDao">
+
+    <select id="findStudentByDynamicSql" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student
+        where 1=1
+        <!--id不为空拼接的动态sql-->
+        <if test="id !=null">
+            and id = #{id}
+        </if>
+        <!--name不为空拼接的动态sql-->
+        <if test="name !=null and name != ''">
+            and name = #{name}
+        </if>
+        <!--age不为空拼接的动态sql-->
+        <if test="age !=null and age != ''">
+            and age = #{age}
+        </if>
+    </select>
+
+    <select id="findStudentByIds" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student
+        <where>
+            <if test="ids !=null ">
+            and id in
+                <foreach collection="ids" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+</mapper>
