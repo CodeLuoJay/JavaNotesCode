@@ -18,7 +18,8 @@
 | mybatis-course-dao and proxy   | mybatis入门学习  | [Mybatis入门学习三](study-guide/Mybatis入门学习三.md) |
 | mybatis-course-resulttype   | mybatis入门学习  | [Mybatis入门学习四](study-guide/Mybatis入门学习四-resultType.md) |
 | mybatis-course-resultMap   | mybatis入门学习  | [Mybatis入门学习五](study-guide/Mybatis入门学习五-resultMap.md) |
-| mybatis-course-resultMap   | mybatis入门学习  | [Mybatis入门学习六](study-guide/Mybatis入门学习六-dynamicSql.md) |
+| mybatis-dynamic-sql   | mybatis入门学习  | [Mybatis入门学习六](study-guide/Mybatis入门学习六-dynamicSql.md) |
+| mybatis-main-properties   | mybatis入门学习  | [Mybatis入门学习七](study-guide/Mybatis入门学习七-properties.md) |
 
 ### 2.2目录结构说明
 
