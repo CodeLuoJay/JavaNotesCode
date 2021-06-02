@@ -163,7 +163,7 @@ typeAlias基本用法：
 
 类型别名可为 Java 类型设置一个缩写名字。 它仅用于 XML 配置，意在降低冗余的全限定类名书写。例如：
 
-```xml
+```java
 <typeAliases>
         <typeAlias type="com.luojay.domain.student" alias="stu"/>
 </typeAliases>
@@ -336,10 +336,75 @@ public class StudentVO {
  </mappers>
 ```
 
-这样就不用一个个手写`<mapper>`标签去对应。
+这样就不用一个个手写`<mapper>`标签去对应，但是要注意使用`package`的要求：
 
+1. mapper文件名称需要和接口名称一样，区分大小写的一样
+2. mapper文件和dao接口需要在同一目录
 
+## 5.学习Mybatis的`<properties>`标签配置内容
 
+在之前的入门案例中，数据库的配置信息都是写死在标签里面的，这样一改动就要到配置文件中改动对应的配置信息，并且容易改错，不利用动态维护。
 
+![image-20210602230726507](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210602230726507.png)
 
-文章配套源码[JavaNotesCode/mybatis-main-properties at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-main-properties)
+比如数据的配置新，上面的①②③④点全部写在配置文件中，下次改动还是来主配置文件来改动，并且如果数据库配置信息不止一个，可能四五六七八个，改起来就很麻烦费劲。那有没有可以独立出来一个单独文件来维护这些数据库信息办法？
+
+答案是有的，mybatis提供的`<properties>`可以让我们可以在外部进行配置属性值，并可以用属性名进行动态替换。最典型的就是可以在典型的 Java 属性文件中`properties`配置这些属性，这样更利于友好维护。
+
+### 5.1基本用法
+
+在resources目录中定义一个属性配置文件，xxxx.properties，例如jdbc.properties属性配置文件中，
+
+定义数据，格式是key=value  key：一般使用.做多级目录的。value：对应的值。
+
+```properties
+ jdbc.driver=com.mysql.jdbc.Driver 
+ jdbc.url=jdbc:mysql//.....
+ jdbc.username=root jdbc.password=l23456
+```
+
+### 5.2学习案例
+
+用经典的Java的配置文件`properties`方式来维护这些属性：
+
+1. 首先要在类路径下，新建一个保存数据库配置信息的配置类
+2. 在mybatis主配置文件中引入这个配置类
+3. 使用`${key}`去动态替换属性值
+
+1.定义一个配置文件，我这叫`jdbc.properties`,名字可以随意改变，等于号左边是属性名，右边是属性值
+
+```properties
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/springdb
+username=root
+password=root
+```
+
+2.在`mybatis.xml`中`<configuration>`下引入这个配置类
+
+```xml
+    <!--指定properties文件的位置，从类路径根开始找文件-->
+    <properties resource="jdbc.properties"/>
+```
+
+3.使用`${属性名}`去动态替换属性值
+
+```xml
+<environment id="dev">
+    <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </dataSource>
+</environment>
+```
+
+最后去运行测试类`TestMybatis`的任意方法，测试是否可以建立数据库连接。
+
+## 6.文末总结
+
+至此，结合之前学习的案例，基本上算是一路以来把案例一点点往真实开发中去改造，虽然还没和`spring`、`springmvc`以及`springboot`等框架整合，但是基本上都有了真实开发的样子。
+
+文章配套源码：[JavaNotesCode/mybatis-main-properties at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-main-properties)
+
