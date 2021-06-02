@@ -60,6 +60,7 @@
     <!--（sql mapper）sql映射文件的位置-->
     <mappers>
         <!--一个mapper标签指定一个文件的位置，从类路径开始的路径信息  类路径：target/classes-->
-        <mapper resource="com/luojay/dao/StudentDao.xml"/>
+        <!--<mapper resource="com/luojay/dao/StudentDao.xml"/>-->
+        <package name="com.luojay.dao"/>
     </mappers>
 </configuration>
