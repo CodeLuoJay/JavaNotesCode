@@ -163,7 +163,7 @@ typeAlias基本用法：
 
 类型别名可为 Java 类型设置一个缩写名字。 它仅用于 XML 配置，意在降低冗余的全限定类名书写。例如：
 
-```java
+```xml
 <typeAliases>
         <typeAlias type="com.luojay.domain.student" alias="stu"/>
 </typeAliases>
