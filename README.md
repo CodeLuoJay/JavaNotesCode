@@ -23,7 +23,7 @@
 
 ### 2.2目录结构说明
 
-简单以`mybatis-course`模块构建整体目录树，以此来介绍项目的一个基础框架。
+简单以`mybatis-course-start `模块构建整体目录树，以此来介绍项目的一个基础框架。
 
 ```markdown
 │  .gitignore
@@ -32,7 +32,7 @@
 │  
 ├─.idea
 │                                              
-├─mybatis-course
+├─mybatis-course-start 
 │  │  pom.xml
 │  │  
 │  ├─src
