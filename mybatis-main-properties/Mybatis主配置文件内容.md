@@ -148,9 +148,9 @@ Connected to the target VM, address: '127.0.0.1:61166', transport: 'socket'
 
 #### 1.3常用的`<setting>`配置项
 
-1. mapUnderscoreToCamelCase：是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。
-2. useGeneratedKeys：允许 JDBC 支持自动生成主键，需要数据库驱动支持。如果设置为 true，将强制使用自动生成主键。
-3. logImpl： 指定 MyBatis 所用日志的具体实现，未指定时将自动查找。
+1. **mapUnderscoreToCamelCase**：是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。
+2. **useGeneratedKeys**：允许 JDBC 支持自动生成主键，需要数据库驱动支持。如果设置为 true，将强制使用自动生成主键。
+3. **logImpl**： 指定 MyBatis 所用日志的具体实现，未指定时将自动查找。
 
 ## 2.学习Mybatis的`<typeAliases>`标签配置内容
 
@@ -222,3 +222,122 @@ public class StudentVO {
 ```
 
 通常会用`@Alias`解决一些别名冲突问题
+
+## 3.学习Mybatis的`<environments>`标签配置内容
+
+实际开发中，可能程序员用开发数据库进行开发程序，测试人员连接专用测试库测试程序。所以就可能同一个程序，可能要在开发和测试库反复切换。如果手动去改数据库连接配置信息，那肯定是很慢且很LOW的方式。
+
+对于这种常见的需求，MyBatis 提供`<environments>`标签用于切换不同数据库环境，每一个环境对应的连接数据库信息我们提前准备好，然后我们只需要更换一个环境ID就可以做到切换不同数据库，环境ID就是标识唯一的数据库配置环境信息。
+
+### 3.1基本用法
+
+下面是一个常用的环境配置信息模板，以它来讲解mybatis的环境配置信息基本内容
+
+```xml
+<environments default="dev">
+        <!--environment：一个数据库信息的配置（环境） id：一个唯一值，自定义，表示环境的名称-->
+        <!--用于开发的数据库环境实例-->
+        <environment id="dev">
+            <!--transactionManager mybatis的事务类型 type：JDBC(表示使用jdbc中的Connection对象的commit,rollback)-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource type：表示数据源的类型，POOLED表示使用连接池-->
+            <dataSource type="POOLED">
+                <!--driver url username password 是固定的，不能自定义的 值可以自定义-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springdb"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+</environments>
+```
+
+#### 3.1.1`<environments>`标签
+
+`environments`中 default属性：比如：`default="dev"`是当前选择用dev的环境ID对应数据库配置信息连接数据库，一个`environments`可以配置多个`environment `
+
+通常日常开发，会常见定义不同环境ID,`dev`对应开发库，`pro`对应生产库，`test`对应测试库
+
+#### 3.1.2`transactionManager`标签
+
+用来指定Mybatis使用事务管理器的配置，比如：type="JDBC"，type：表示事务的类型，JDBC表示使用jdbc中的Connection对象的commit,rollback等方法提交事务。
+
+在 MyBatis 中有两种类型的事务管理器（也就是 type="[JDBC|MANAGED]"）：
+
+- **JDBC** – 使用jdbc中的Connection对象的commit（提交）,rollback（回滚）等方法管理事务。
+- **MANAGED** – 不配置事务。配置后它不会提交或回滚一个连接，而是让容器来管理事务的提交和回滚。
+
+> **提示** 如果你正在使用 Spring + MyBatis，则没有必要配置事务管理器，因为 Spring 模块会使用自带的管理器来覆盖前面的配置。
+
+#### 3.1.3`<environment>` 标签
+
+每个 `environment` 中的 id：比如：`id="dev"`用来标识全局唯一对应的数据库连接信息。
+
+#### 3.1.4`dataSource`标签
+
+`dataSource`标签：用于配置数据源，比如：type="POOLED"。type：表示数据源的类型，POOLED表示利用“池”的概念将 JDBC 连接对象组织起来，避免了创建新的连接实例时所必需的初始化和认证时间。
+
+有三种内建的数据源类型（也就是 type="[UNPOOLED|POOLED|JNDI]"）：
+
+**UNPOOLED**– 这个数据源的实现会每次请求时打开和关闭连接
+
+**POOLED**– 这种数据源的实现利用“池”的概念将 JDBC 连接对象组织起来，避免了每次操作数据库都创建新的连接实例时所必需的初始化和认证时间
+
+**JNDI** – 这个比较老的属性值，在一些历史悠久的项目中才会看到，这个数据源实现是为了能在如 EJB 或应用服务器这类容器中使用
+
+## 4.学习Mybatis的`<mappers>`标签配置内容
+
+`mappers`标签是用来告诉mybatis去哪找我们写的接口方法的对应的SQL映射的xml文件，在实际开发中，通常是指定一个包名的方式来配置多个SQL映射xml文件。
+
+每一个`<mappers>`标签下面可以配置多个`<mapper>`标签
+
+```xml
+    <mappers>
+        <!--一个mapper标签指定一个文件的位置，从类路径开始的路径信息  类路径：target/classes-->
+        <mapper resource="com/luojay/dao/StudentDao.xml"/>
+        <mapper resource="com/luojay/dao/CourseDao.xml"/>
+    </mappers>
+```
+
+### 4.1使用相对于类路径找到一对一映射文件
+
+`mapper`使用`resource`属性是告诉mybatis用相对类路径的去查找对应的SQL映射xml文件，**类路径**是哪个路径呢？就是我们编译后项目后的target文件夹的内部的classes文件夹内就是类路径。
+
+![image-20210602204834828](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210602204834828.png)
+
+以maven项目为例讲解类路径
+
+1. ①中的所有文件（maven项目的main文件目录下所有文件）经过maven的compile命令或者IDEA自带的构建工具，将会在项目下新建target文件夹，并将①中的所有文件按照编译规范复制到②中
+2. target目录与src目录是平级目录，它下面的classes文件内部就是类路径的根路径
+3. `com/luojay/dao/StudentDao.xml`就是在`target/classes/`下经过拼接找到对应的xml文件
+
+![image-20210602205909090](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210602205909090.png)
+
+### 4.2使用完全限定类名找到一对一映射文件
+
+`StudentDao.java`是有一个全限定类名(idea 快捷建ctrl+shift+alt+a可以复制全限定类名)，对应它的字节码文件`StudentDao.class`。通过这个也可以指定一对一的SQL映射xml文件。
+
+因此我们只要通过`<mapper>`的`class`属性，也可以找到跟它一一对应的xml文件。
+
+```xml
+<mappers>
+  <mapper class="com.luojay.dao.StudentDao"/>
+</mappers>
+```
+
+### 4.3使用包名找到多个映射文件
+
+`package`标签的`name`属性就是告诉mybatis去到这个属性值的全限定命名包下`com.luojay.dao`找到mapper同名的xml文件，将它注册到`sqlSessionfactory`中。
+
+```
+ <mappers>
+ 		<!--使用包名注册多个mapper-->
+        <package name="com.luojay.dao"/>
+ </mappers>
+```
+
+这样就不用一个个手写`<mapper>`标签去对应。
+
+
+
+文章配套源码
