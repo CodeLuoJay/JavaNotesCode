@@ -141,3 +141,6 @@ PageInfo{pageNum=2, pageSize=3, size=1, startRow=4, endRow=4, total=4, pages=2, 
 ```
 
 这样就可以各取所需给到对应的前端所需要的分页信息。
+
+## 文章源码学习
+[JavaNotesCode/mybatis-plugins-pagehelper at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-plugins-pagehelper)
