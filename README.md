@@ -20,6 +20,7 @@
 | mybatis-course-resultMap   | mybatis入门学习  | [Mybatis入门学习五](study-guide/Mybatis入门学习五-resultMap.md) |
 | mybatis-dynamic-sql   | mybatis入门学习  | [Mybatis入门学习六](study-guide/Mybatis入门学习六-dynamicSql.md) |
 | mybatis-main-properties   | mybatis入门学习  | [Mybatis入门学习七](study-guide/Mybatis入门学习七-properties.md) |
+| mybatis-plugins-pageHelper   | mybatis入门学习  | [Mybatis入门学习八](study-guide/mybatis分页插件.md) |
 
 ### 2.2目录结构说明
 

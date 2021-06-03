@@ -14,6 +14,9 @@
         <module>mybatis-course-util</module>
         <module>mybatis-course-start</module>
         <module>mybatis-course-proxy</module>
+        <module>mybatis-dynamic-sql</module>
+        <module>mybatis-main-properties</module>
+        <module>mybatis-plugins-pagehelper</module>
     </modules>
     <!--1.修改打包方式-->
     <packaging>pom</packaging>
@@ -24,6 +27,8 @@
         <mybatis.version>3.5.1</mybatis.version>
         <mysql.version>5.1.9</mysql.version>
         <hutool.version>5.3.7</hutool.version>
+        <pagehelper.version>5.2.0</pagehelper.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
     <!--3.依赖管理-->
     <dependencyManagement>
@@ -58,6 +63,17 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <!--pagehelper-->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
