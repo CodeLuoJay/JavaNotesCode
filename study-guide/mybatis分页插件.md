@@ -87,7 +87,7 @@ Student(id=2, name=bobi, email=bobi@qq.com, age=25)
 
 首先看下我数据库的所有数据，一共式4条数据。
 
-![image-20210603222747507](C:\Users\Admin\Desktop\mybatis分页插件.assets\image-20210603222747507.png)
+![image-20210603222747507](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210603222747507.png)
 
 
 
