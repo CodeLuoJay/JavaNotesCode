@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mybatis.course.dao</artifactId>
+    <artifactId>mybatis-course-dao</artifactId>
     <name>mybatis-course-dao</name>
 
     <properties>

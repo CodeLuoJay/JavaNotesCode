@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：命名空间 StudentDao能找到StudentDao.xml一一对应的映射实例-->
+<mapper namespace="com.luojay.dao.StudentDao">
+
+    <select id="findStudentByDynamicSql" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student
+        where 1=1
+        <!--id不为空拼接的动态sql-->
+        <if test="id !=null">
+            and id = #{id}
+        </if>
+        <!--name不为空拼接的动态sql-->
+        <if test="name !=null and name != ''">
+            and name = #{name}
+        </if>
+        <!--age不为空拼接的动态sql-->
+        <if test="age !=null and age != ''">
+            and age = #{age}
+        </if>
+    </select>
+
+    <select id="findStudentByIds" resultType="com.luojay.domain.Student">
+        select
+        <include refid="Base_Column_List"/>
+        from Student
+        <where>
+            <if test="ids !=null ">
+            and id in
+                <foreach collection="ids" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="findStudentWithoutTrim" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and name like  concat('%',#{name},'%')
+            </if>
+            <if test="age != null">
+                and age =  #{age}
+            </if>
+        </where>
+    </select>
+    <select id="findStudentWithTrim" resultType="com.luojay.domain.Student">
+        select id,name,email,age from Student
+        <trim prefix="where" prefixOverrides="and |or">
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null">
+                and name like  concat('%',#{name},'%')
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+        </trim>
+    </select>
+    <insert id="insertStudentWithTrimDeleteComma">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="courseId != null">
+                courseId,
+            </if>
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="age != null">
+                #{age},
+            </if>
+            <if test="courseId != null">
+                #{courseId},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateStudentWithSet" parameterType="com.luojay.domain.Student">
+        update student
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateStudentWithTrim" parameterType="com.luojay.domain.Student">
+        update student
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+    <select id="findStudentWithChooseWhenOtherWise" resultType="com.luojay.domain.Student">
+        select id,name,email,age,courseId from Student
+        <where>
+            <choose>
+                <when test="name != null and name != ''">
+                    and name like concat('%',#{name},'%')
+                </when>
+                <when test="age != null ">
+                    and age =#{age}
+                </when>
+                <otherwise>
+                    and courseId = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <sql id="Base_Column_List">
+            id, name,email,age,courseId
+    </sql>
+    <select id="findStudentBySQL" resultType="com.luojay.domain.Student">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+    </select>
+</mapper>
