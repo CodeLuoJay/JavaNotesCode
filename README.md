@@ -21,6 +21,7 @@
 | mybatis-dynamic-sql   | mybatis入门学习  | [Mybatis入门学习六](study-guide/Mybatis入门学习六-dynamicSql.md) |
 | mybatis-main-properties   | mybatis入门学习  | [Mybatis入门学习七](study-guide/Mybatis入门学习七-properties.md) |
 | mybatis-plugins-pageHelper   | mybatis入门学习  | [Mybatis入门学习八](study-guide/mybatis分页插件.md) |
+| mybatis-dynamic-sql-advanced   | mybatis入门学习  | [Mybatis入门学习九](study-guide/Mybatis动态SQL高级用法.md) |
 
 ### 2.2目录结构说明
 
