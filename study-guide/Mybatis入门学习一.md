@@ -240,18 +240,32 @@ public class TestMybatis {
 }
 ```
 
-### 3.7运行测试类
+### 3.7案例总结和源码下载
 
 运行测试类的插入和查询方法，查看控制台日志，会输出相应的语句记录
 
-![image-20210510225544699](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210510231324977.png)
+```bash
+==>  Preparing: select id,name,email,age from Student order by id 
+==> Parameters: 
+<==    Columns: id, name, email, age
+<==        Row: 0, luojay, luojay@qq.com, 24
+<==        Row: 1, mysqlTest, mysql@qq.com, 23
+<==        Row: 2, bobi, bobi@qq.com, 24
+<==        Row: 3, bobi, bobi@qq.com, 25
+<==      Total: 4
+Student(id=0, name=luojay, email=luojay@qq.com, age=24)
+Student(id=1, name=mysqlTest, email=mysql@qq.com, age=23)
+Student(id=2, name=bobi, email=bobi@qq.com, age=24)
+Student(id=3, name=bobi, email=bobi@qq.com, age=25)
+```
 
-### 3.8案例目录结构图
+**案例目录结构图**
 
-![image-20210510231324977](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210510231324977.png)
+![image-20210612123159012](F:\JavaNotesCode\study-guide\Mybatis入门学习一.assets\image-20210612123159012-1623472825357.png)
 
-## 4.总结
+完成上述步骤，这样就完成高度耦合的Mybatis入门学习案例。在实际开发中，不会存在这样案例代码。
 
-完成上述步骤，这样就完成高度耦合的Mybatis入门学习案例。高度耦合就是人手都能玩的明白的案例，实际开发中，不会存在这样案例代码。
+[JavaNotesCode/mybatis-course-dao at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-dao)
 
-[源码下载]()
+如果文章对你有帮助，请帮忙点个Start支持我一下，另外如果想持续跟进本教程，可以点击fork将本仓库克隆到你的仓库
+

@@ -169,7 +169,7 @@ Mybatis执行了sql语句，得到数据如何封装成Java对象？实际上，
 
 封装成Map的原理图如下
 
-![image-20210522142756040](C:\Users\Admin\Desktop\Mybatis入门学习三.assets\image-20210522142756040.png)
+![image-20210522142756040](F:\JavaNotesCode\study-guide\Mybatis入门学习四-resultType.assets\image-20210522142756040.png)
 
 ### 3.4使用`resultType`类型来封装成基本数据类型
 
@@ -276,4 +276,17 @@ Mybatis执行了sql语句，得到数据如何封装成Java对象？实际上，
     }
 ```
 
+## 4.源码下载和总结
+
 关于Mybatis的传递参数给对应SQL语句执行和SQL语句执行结果返回封装成Java对象的教程就写到这里，几乎把日常开发中常用到的东西都总结了一下，希望自己在日常开发过程中有遗忘的时候，再回来翻这篇笔记，同时也希望能帮助到别人，更快学习Mybatis的传参和结果封装。
+
+本篇文章涉及到三个模块的代码
+
+[JavaNotesCode/mybatis-course-singleparam at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-singleparam)
+
+[JavaNotesCode/mybatis-course-mulitparam at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-mulitparam)
+
+[JavaNotesCode/mybatis-course-resulttype at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-resulttype)
+
+如果文章对你有帮助，请帮忙点个Start支持我一下，另外如果想持续跟进本教程，可以点击fork将本仓库克隆到你的仓库
+

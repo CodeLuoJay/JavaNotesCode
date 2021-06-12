@@ -131,3 +131,10 @@ Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@2
 <==      Total: 4
 ```
 
+### 2.5案例总结和源码下载
+
+完成上述步骤，这样就完成Mybatis入门学习案例优化，这样才较为贴合在实际开发中代码，实际开发中是用Spring+Mybatis整合。
+
+[JavaNotesCode/mybatis-course-util at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-util)
+
+如果文章对你有帮助，请帮忙点个Start支持我一下，另外如果想持续跟进本教程，可以点击fork将本仓库克隆到你的仓库。

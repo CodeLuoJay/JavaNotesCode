@@ -315,6 +315,10 @@ collection标签用法：
 2. ofType属性：对象的全限定类名
 3. collection标签内部的标签用法就跟result的基础用法一致，id对应主键列，result对应非主键列
 
-# 文章配套源码
+## 5.文章配套源码
+`resultMap`在实际工作中用的比较多是用来处理别名不一致的问题，同时还用来处理一对一，一对多的查询，所以在学习中很有必要掌握这个参数的使用。
+
 [JavaNotesCode/mybatis-course-resultmap at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-resultmap)
+
+如果文章对你有帮助，请帮忙点个Start支持我一下，另外如果想持续跟进本教程，可以点击fork将本仓库克隆到你的仓库。
 

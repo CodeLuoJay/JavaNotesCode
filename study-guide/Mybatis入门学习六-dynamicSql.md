@@ -6,7 +6,7 @@ Mybatis动态SQL语句主要是指where部分发生变化，动态sql的实现�
 
 用的比较多的是`<if>`，`<where>`，`<foreach>`这三个标签
 
-## 1.动态SQL语句`<if>`标签使用
+## 1.动态SQL语句`if`标签使用
 
 ### 1.1基本用法
 
@@ -274,6 +274,12 @@ Student(id=2, name=bobi, email=bobi@qq.com, age=25)
 Student(id=3, name=bobi, email=bobi@qq.com, age=25)
 ```
 
-### 3.3案例总结
-
 从打印出来的日志可以看出，foreach标签确实如我们之前提到，将ids的中id按照我们制定`(0,1,2,3)`这种形式拼接，最终查询多个学生信息。
+
+## 4.总结和源码下载
+
+`if`、`where`、`foreach`这三个标签实际开发中是经常用到，是最最最基础的三个动态语句的标签，所以必须要掌握这三个标签的使用。
+
+[JavaNotesCode/mybatis-dynamic-sql at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-dynamic-sql)
+
+如果文章对你有帮助，请帮忙点个Start支持我一下，另外如果想持续跟进本教程，可以点击fork将本仓库克隆到你的仓库。
