@@ -1,6 +1,6 @@
 ## 引言
 
-前面的入门学习案例中文章一和二中，似乎都给人一种错觉，只需要用到`StudentDao.xml`再加上`Student`以及连接数据库的操作配置和工具类，就可以完成整体流程，`StudentDao.java`似乎没有多大用处。
+前面的入门学习案例中文章一和二中，似乎都给人一种错觉，只需要用到`StudentDao.xml`再加上`Student.java`以及连接数据库的操作配置和工具类，就可以完成整体流程，`StudentDao.java`似乎没有多大用处。
 
 附上学习案例一二链接：
 
@@ -50,15 +50,17 @@ public class TestMybatis {
 }
 ```
 
-在测试类的代码中，不难发现测试的代码还涉及到业务相关的代码，如1、2、5步骤等业务相关的代码，其实在实际开发，测试类只需要做到调用接口，接口返回数据这样才是合理的规范。
+在测试类的代码中，不难发现测试的代码还涉及到业务相关的代码，如**1、2、5步骤等业务相关的代码**，其实在实际开发，测试类只需要做到调用接口，接口返回数据这样才是合理的规范。
 
 那么我们其实需要用到`StudentDao`的实现类，把1、2、5的步骤代码写在实现类中，就可以优化上面的问题，使程序更加规范。
 
-## 1.mybatis使用传统的dao方式连接数据库查询数据
+## 1.Mybatis使用传统的dao方式查询数据
 
-传统的dao方式就是写一个dao的实现类,如`StudentDao`接口需要写一个`StudentDaoImpl`,然后实现类每一个方法中实现数据库连接、操作数据库以及会话对象的关闭，这样就可以实现测试类中调用接口就返回数据，无需关心内容逻辑代码实现，知道思路便可以开整。
+传统的dao方式就是写一个dao的实现类,如`StudentDao`接口需要写一个`StudentDaoImpl`,然后实现类每一个方法中实现数据库连接、操作数据库以及会话对象的关闭。
 
-接口
+这样就可以实现测试类中调用接口就返回数据，无需关心内容逻辑代码实现，知道思路便可以开整，那么我们可以来实现这样的dao方式查询数据
+
+`StudentDao.java`
 
 ```java
 // 接口定义操作数据库的方法
@@ -68,7 +70,7 @@ public interface StudentDao {
 }
 ```
 
-接口实现类
+`StudentDaoImpl.java`
 
 ```java
 //	接口的每一个方法实现数据库的连接和操作数据库
@@ -95,7 +97,7 @@ public class StudentDaoImpl implements StudentDao {
 }
 ```
 
-接口对应的mapper.xml
+`StudentDao.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -112,7 +114,7 @@ public class StudentDaoImpl implements StudentDao {
 </mapper>
 ```
 
-实体类
+`Student.java`
 
 ```java
 @Data
@@ -127,7 +129,7 @@ public class Student {
 }
 ```
 
-工具类
+`MybatisUtils.java`
 
 ```java
 //	之前抽取出来的方便连接数据库的工具类
@@ -158,7 +160,7 @@ public class MybatisUtils {
 }
 ```
 
-之后编写测试类文件
+`TestMybatis`
 
 ```java
 public class TestMybatis {
@@ -180,15 +182,17 @@ public class TestMybatis {
 
 ```
 
-完整的目录截图，其中配置文件的内容略过没有写出来，完整的可以查看源码。
+完整的目录截图，其中配置文件的内容略过没有写出来，完整的可以查看源码或者查看之前的入门案例[JavaNotesCode/Mybatis入门学习一.md at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/blob/master/study-guide/Mybatis入门学习一.md)。
 
 ![image-20210516165350284](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210516165350284.png)
 
 这样子，我们对第一个例子又进行一个简化，相当于第二次简化
 
-## 2.mybatis使用传统的dao方式连接数据库查询数据的原理
+## 2.Mybatis使用传统的dao方式查询数据的原理
 
-### 2.1整体的执行流程：`StudentDao` -> `StudentDaoImpl`->`StudentDao.xml`
+### 2.1整体的执行流程：
+
+`StudentDao` -> `StudentDaoImpl`->`StudentDao.xml`
 
 1. StudentDao定义操作数据库规范，如定义查询所有的学生的接口规范
 2. StudentDaoImpl定义操作数据库行为，如连接数据库、查询数据
@@ -210,9 +214,11 @@ public class TestMybatis {
 
 ![image-20210515125624320](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210515125624320.png)
 
-## 3.mybatis使用动态代理的方式去连接数据库查询数据
+## 3.Mybatis使用动态代理的方式查询数据
 
-有了上述的分析之后，我们就可以使用mybatis的动态代理的方式去优化之前的案例，只需要在测试类中改变获取Dao接口的方式，将它改变成使用动态代理的方式获取，这里用到的`sqlSession.getMapper(Class class)`
+### 3.1动态代理案例
+
+有了上述的分析之后，我们就可以使用Mybatis的动态代理的方式去优化之前的案例，只需要在测试类中改变获取Dao接口的方式，将它改变成使用动态代理的方式获取，这里用到的`sqlSession.getMapper(Class class)`
 
 ```java
 public class TestMybatis {
@@ -233,8 +239,18 @@ public class TestMybatis {
 }
 ```
 
+`sqlSession.getMapper(StudentDao.class)`内部使用Java的反射方式，去获取方法名、参数、返回值等等信息，然后执行对应的SQL语句。
+
+### 3.2总结和源码下载
+
 这样就可以把传统的`StudentDaoImpl`干掉，不用写实现类，也不用我们自己手动提交事务，关闭`SqlSesssion`连接对象，整一个目录结构也清爽疑点。
 
 ![image-20210516171151331](https://gitee.com/codeluojay/TyproaImage/raw/master/images/image-20210516171151331.png)
 
 我们可以通过`studentDao.getClass().getName()`来验证是否是使用动态代理的方式，结果打印出来的结果是`com.sun.proxy.$Proxy4`,证明它是使用sun公司的proxy方式，这种方式就是JDK动态代理，使用动态代理的方式也是企业中开发主流的开发方式。
+
+这是一个两个案例结合的一篇文章，所以有两处源码，对应着上面两种不同方式。
+
+[JavaNotesCode/mybatis-course-dao at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-dao)
+
+[JavaNotesCode/mybatis-course-proxy at master · CodeLuoJay/JavaNotesCode (github.com)](https://github.com/CodeLuoJay/JavaNotesCode/tree/master/mybatis-course-proxy)
